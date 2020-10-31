@@ -4,10 +4,10 @@ int main() {
 
     int variable = 8;
 
-    int* ptr; // empty!!! ----> Null Pointer
+    int* ptr = 0; // empty!!! ----> Null Pointer
 
     std::cout << ptr << std::endl;
-    // std::cout << *ptr << std::endl; -- Don't uncomment, will blow up!
+    // std::cout << *ptr << std::endl; // -- Don't uncomment, will blow up!
 
     std::cout << "Memory address of variable: " << &variable << std::endl;
     std::cout << "Memory address of ptr: " << &ptr << std::endl;
@@ -19,6 +19,10 @@ int main() {
     *ptr = 25;
 
     std::cout << variable << std::endl;
+
+    variable = 15;
+
+    std::cout << *ptr << std::endl;
 
     return 0;
 }
