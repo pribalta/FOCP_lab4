@@ -1,34 +1,35 @@
 #include <iostream>
-#include <vector>
+#include <map>
+#include <fstream>
+#include <string>
 
-// INPUTS ---> {???} ---> OUTPUT
-
-// void print_contents(std::vector<int>* input) {
-//     for(int i = 0; i < input->size(); i++) {
-//         std::cout << input->at(i) << std::endl;
-//     }
-// }
-
-void print_contents(std::vector<int>& input) {
-    for(int i = 0; i < input.size(); i++) {
-        std::cout << input[i] << std::endl;
-    }
-}
 
 int main() {
 
-    int size;
+    // word - counter
+    std::map<std::string, int> dictionary;
 
-    std::cout << "Provide a size for your array: " << std::endl;
-    std::cin >> size;
+    std::ifstream input("lorem.txt");
+    
+    if (input.is_open()) {
 
-    std::vector<int> numbers;
+        std::string word;
 
-    for (int i = 0; i < size; i++) {
-        numbers.push_back(i);
-    }    
+        while (getline(input, word)) {            
+            if (dictionary.find(word) == dictionary.end()) { // If reached the end of dict finding a key
+                dictionary.insert({word, 1}); // Add word to dictionary with 1 occurence
+            } else {
+                dictionary[word]++; // Increase number of occurences by 1
+            }
+        }
+    }
 
-    print_contents(numbers);
+    std::string tmp;
+
+    std::cout << "Choose a word: " << std::endl;
+    std::cin >> tmp;
+
+    std::cout << "The word " << tmp << " appears " << dictionary[tmp] << " times." << std::endl;
 
     return 0;
 }
